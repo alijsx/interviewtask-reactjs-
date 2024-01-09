@@ -74,7 +74,7 @@ const CardContainer = () => {
       toast.success(`Card "${currentCard}" moved to Box ${currentBox + 1}!`);
     }
   };
-  
+
   const handleMoveBack = (id) => {
     const updatedCards = { ...cards };
     if (updatedCards[id].box > 1) {
@@ -91,23 +91,24 @@ const CardContainer = () => {
       <Toaster />
       <div className="bg-white rounded mt-10">
         <div className='flex justify-center'>
-        
+
           <div className=''>
-          <input
-            type="text"
-            placeholder="Card Text"
-            required
-            value={newCardText}
-            onChange={(e) => setNewCardText(e.target.value)}
-            className=" p-2 mb-4 border rounded w-96 mr-2"
-          />
+            <input
+              type="text"
+              placeholder="Card Text"
+              required
+              value={newCardText}
+              onChange={(e) => setNewCardText(e.target.value)}
+              className=" p-2 mb-4 border rounded w-96 mr-2"
+            />
             <button
               onClick={handleAddCard}
-              className={`bg-${isEditing ? 'blue' : 'green'}-500 text-white py-2 px-4 rounded hover:bg-${isEditing ? 'blue' : 'green'
-                }-600 `}
+              className={`bg-${isEditing ? 'blue' : 'green'} text-black py-2 px-4 rounded hover:bg-${isEditing ? 'blue' : 'green'} text-black`}
             >
               {isEditing ? 'Edit Card' : 'Add Card'}
             </button>
+
+
           </div>
         </div>
       </div>
