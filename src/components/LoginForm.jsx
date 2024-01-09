@@ -1,34 +1,13 @@
-import React, { useState } from 'react';
-
-const LoginForm = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-
-
-
-
+const LoginForm = ({ onLogin, email, password, setEmail, setPassword }) => {
   const handleLogin = () => {
-    onLogin();
+    onLogin(email, password); 
   };
 
   return (
     <>
-
-
-
-
-
-
-
-
-
-
-
       <div className="bg-gray-100 p-6 rounded shadow-md">
-
         <div className='text-center'>
-          <h1 className='text-xl'>Email:  abc@gmail.com </h1>
+          <h1 className='text-xl'>Email: abc@gmail.com </h1>
           <h1 className='text-xl'>Password: password</h1>
         </div>
         <input
@@ -36,10 +15,6 @@ const LoginForm = ({ onLogin }) => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-
-
-
-
           className="w-full p-2 mb-4 mt-5"
         />
         <input
@@ -47,9 +22,6 @@ const LoginForm = ({ onLogin }) => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-
-
-
           className="w-full p-2 mb-4"
         />
         <button
@@ -59,11 +31,8 @@ const LoginForm = ({ onLogin }) => {
           Login
         </button>
       </div>
-
     </>
   );
-
-
 };
 
 export default LoginForm;

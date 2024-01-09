@@ -7,6 +7,8 @@ import toast, { Toaster } from 'react-pop-toast';
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   useEffect(() => {
     const userLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
@@ -14,7 +16,11 @@ const App = () => {
   }, []);
 
   const handleLogin = async () => {
+
+
+    
     try {
+      const emailToLogin = 'abc@gmail.com'; 
       const promise = new Promise((resolve, reject) => {
         fetch('https://netflix-clone-apis.vercel.app/api/v1/login', {
           method: 'POST',
@@ -22,15 +28,24 @@ const App = () => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            email: 'abc@gmail.com',
-            password: 'password',
+            email,
+            password,
           }),
         })
           .then((response) => {
+
+
+
             if (response.ok) {
-              setLoggedIn(true);
-              localStorage.setItem('isLoggedIn', 'true');
-              resolve();
+
+              if (email === emailToLogin) {
+                setLoggedIn(true);
+                localStorage.setItem('isLoggedIn', 'true');
+                resolve();
+              } else {
+                console.error('Invalid email');
+                reject();
+              }
             } else {
               console.error('Login failed');
               reject();
@@ -42,6 +57,9 @@ const App = () => {
           });
       });
 
+
+
+  
       toast.promise(
         promise,
         {
@@ -50,7 +68,7 @@ const App = () => {
             return <b>Login successful!</b>;
           },
           error: () => {
-            return <b>Login failed!</b>;
+            return <b>Unable to Login</b>;
           },
         }
       );
@@ -58,6 +76,7 @@ const App = () => {
       console.error('Login failed:', error);
     }
   };
+  
 
   const handleLogout = () => {
     setLoggedIn(false);
@@ -75,7 +94,13 @@ const App = () => {
           <CardContainer />
         </div>
       ) : (
-        <LoginForm onLogin={handleLogin} />
+        <LoginForm
+        onLogin={handleLogin}
+        email={email}
+        password={password}
+        setEmail={setEmail}
+        setPassword={setPassword}
+      />
       )}
     </div>
   );
